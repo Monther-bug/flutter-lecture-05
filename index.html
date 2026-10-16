@@ -1,0 +1,536 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Lecture 05 · Layout: Column & Row</title>
+  <meta name="description" content="Mobile App Development with Flutter, Lecture 05: Column, Row, alignment, SizedBox, Padding and Expanded.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;600&amp;family=Sora:wght@600;700&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+  <script>document.documentElement.classList.add('js');</script>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="flutter-logo" viewBox="0 0 166 210">
+    <path fill="#44D1FD" d="M10 101 100 11h56L38 129z"/>
+    <path fill="#1FBCFD" d="M51 150 100 102h56l-77 76z"/>
+    <path fill="#08589C" d="M79 178 107 150l49 49h-56z"/>
+  </symbol>
+  <symbol id="i-git" viewBox="0 0 24 24"><circle cx="6" cy="18" r="3"/><circle cx="18" cy="6" r="3"/><path d="M6 3v12"/><path d="M18 9a9 9 0 0 1-9 9"/></symbol>
+  <symbol id="i-code" viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></symbol>
+  <symbol id="i-phone" viewBox="0 0 24 24"><rect x="5" y="2" width="14" height="20" rx="2.5"/><path d="M11 18h2"/></symbol>
+  <symbol id="i-download" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><path d="M12 15V3"/></symbol>
+  <symbol id="i-windows" viewBox="0 0 24 24"><rect x="3" y="3" width="8" height="8" rx="1"/><rect x="13" y="3" width="8" height="8" rx="1"/><rect x="3" y="13" width="8" height="8" rx="1"/><rect x="13" y="13" width="8" height="8" rx="1"/></symbol>
+  <symbol id="i-laptop" viewBox="0 0 24 24"><path d="M20 16V7a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v9"/><path d="M2 19.5 4 16h16l2 3.5a1 1 0 0 1-.9 1.5H2.9a1 1 0 0 1-.9-1.5z"/></symbol>
+  <symbol id="i-sparkles" viewBox="0 0 24 24"><path d="m12 3-1.9 5.8a2 2 0 0 1-1.3 1.3L3 12l5.8 1.9a2 2 0 0 1 1.3 1.3L12 21l1.9-5.8a2 2 0 0 1 1.3-1.3L21 12l-5.8-1.9a2 2 0 0 1-1.3-1.3z"/><path d="M5 3v4M3 5h4M19 17v4M17 19h4"/></symbol>
+  <symbol id="i-play" viewBox="0 0 24 24"><polygon points="6 3 20 12 6 21 6 3"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></symbol>
+  <symbol id="i-check-circle" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="m8 12 3 3 5-6"/></symbol>
+  <symbol id="i-x" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></symbol>
+  <symbol id="i-cpu" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><path d="M9 1v3M15 1v3M9 20v3M15 20v3M20 9h3M20 14h3M1 9h3M1 14h3"/></symbol>
+  <symbol id="i-disk" viewBox="0 0 24 24"><path d="M22 12H2"/><path d="M5.5 5.1 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.5-6.9A2 2 0 0 0 16.8 4H7.2a2 2 0 0 0-1.7 1.1z"/><path d="M6 16h.01M10 16h.01"/></symbol>
+  <symbol id="i-wifi" viewBox="0 0 24 24"><path d="M5 12.6a11 11 0 0 1 14 0"/><path d="M1.4 9a16 16 0 0 1 21.2 0"/><path d="M8.5 16.1a6 6 0 0 1 7 0"/><path d="M12 20h.01"/></symbol>
+  <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></symbol>
+  <symbol id="i-alert" viewBox="0 0 24 24"><path d="m21.7 18-8-14a2 2 0 0 0-3.5 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.7-3z"/><path d="M12 9v4M12 17h.01"/></symbol>
+  <symbol id="i-bulb" viewBox="0 0 24 24"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"/><path d="M9 18h6M10 22h4"/></symbol>
+  <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></symbol>
+  <symbol id="i-copy" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></symbol>
+  <symbol id="i-folder" viewBox="0 0 24 24"><path d="M4 20h16a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.7-.9l-.8-1.2A2 2 0 0 0 7.9 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2z"/></symbol>
+  <symbol id="i-star" viewBox="0 0 24 24"><polygon points="12 2 15.1 8.3 22 9.3 17 14.1 18.2 21 12 17.8 5.8 21 7 14.1 2 9.3 8.9 8.3 12 2"/></symbol>
+  <symbol id="i-package" viewBox="0 0 24 24"><path d="m7.5 4.3 9 5.1"/><path d="M21 8a2 2 0 0 0-1-1.7l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.7l7 4a2 2 0 0 0 2 0l7-4a2 2 0 0 0 1-1.7z"/><path d="m3.3 7 8.7 5 8.7-5M12 22V12"/></symbol>
+  <symbol id="i-zap" viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></symbol>
+  <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+  <symbol id="i-terminal" viewBox="0 0 24 24"><polyline points="4 17 10 11 4 5"/><path d="M12 19h8"/></symbol>
+  <symbol id="i-activity" viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></symbol>
+  <symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></symbol>
+  <symbol id="i-users" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.9M16 3.1a4 4 0 0 1 0 7.8"/></symbol>
+  <symbol id="i-mouse" viewBox="0 0 24 24"><path d="m4 4 7 17 2.5-7.5L21 11z"/></symbol>
+  <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></symbol>
+  <symbol id="i-chrome" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="4"/><path d="M21.2 8H12M3.9 6.1 8.5 14M10.9 21.9l4.6-7.9"/></symbol>
+  <symbol id="i-cable" viewBox="0 0 24 24"><path d="M17 21v-2a1 1 0 0 1-1-1v-1a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v1a1 1 0 0 1-1 1v2"/><path d="M19 15V6.5a3.5 3.5 0 0 0-7 0v11a3.5 3.5 0 0 1-7 0V9"/><path d="M3 9V5a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v4z"/></symbol>
+  <symbol id="i-apple" viewBox="0 0 24 24"><path d="M12 7c-1.5-1.3-4.5-1.6-6 .5-1.6 2.3-1 6.6 1.3 9.9 1 1.4 2 2.6 3.2 2.5.9 0 1.2-.6 1.5-.6s.6.6 1.5.6c1.2.1 2.2-1.1 3.2-2.5 2.3-3.3 2.9-7.6 1.3-9.9-1.5-2.1-4.5-1.8-6-.5z"/><path d="M12 7c0-2 1-3.5 3-4"/></symbol>
+  <symbol id="i-lock" viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></symbol>
+  <symbol id="i-file" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></symbol>
+  <symbol id="i-arrow-right" viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></symbol>
+  <symbol id="i-gear" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></symbol>
+  <symbol id="i-layers" viewBox="0 0 24 24"><path d="m12 2 10 5-10 5L2 7z"/><path d="m2 17 10 5 10-5"/><path d="m2 12 10 5 10-5"/></symbol>
+  <symbol id="i-palette" viewBox="0 0 24 24"><path d="M12 22a10 10 0 1 1 10-10c0 2.8-2.2 4-4 4h-2a2 2 0 0 0-1.5 3.3c.5.6.3 1.7-.5 2.2-.6.3-1.3.5-2 .5z"/><circle cx="7.5" cy="10.5" r="1"/><circle cx="12" cy="7.5" r="1"/><circle cx="16.5" cy="10.5" r="1"/></symbol>
+  <symbol id="i-home" viewBox="0 0 24 24"><path d="m3 10 9-7 9 7v10a2 2 0 0 1-2 2h-4v-7H9v7H5a2 2 0 0 1-2-2z"/></symbol>
+  <symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></symbol>
+  <symbol id="i-heart" viewBox="0 0 24 24"><path d="M19 14c1.5-1.5 3-3.2 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.8 0-3 .5-4.5 2-1.5-1.5-2.7-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4 3 5.5l7 7z"/></symbol>
+  <symbol id="i-mail" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></symbol>
+  <symbol id="i-image" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-5-5L5 21"/></symbol>
+  <symbol id="i-map-pin" viewBox="0 0 24 24"><path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></symbol>
+</svg>
+
+<div class="progress" aria-hidden="true"><span></span></div>
+
+<main class="deck">
+
+<!-- 01 · Title -->
+<section class="slide">
+  <div class="canvas"><div class="frame frame--title">
+    <div class="stagger">
+      <p class="kicker">Lecture 05 · Mobile App Development</p>
+      <h1 class="hero">Layout:<br><span class="grad-text">Column</span> &amp; Row</h1>
+      <p class="lead lead--hero">Put many widgets on the screen, in the right place, with the right space.</p>
+      <div class="chips">
+        <span class="chip"><span class="avatar">MI</span>Eng. Monther Ibrahim</span>
+        <span class="chip"><span class="avatar">M</span>Muhammad, M.Sc.</span>
+        <span class="chip">Fall 2026</span>
+      </div>
+      <p class="keys"><kbd>→</kbd> next &nbsp;·&nbsp; <kbd>F</kbd> fullscreen &nbsp;·&nbsp; <kbd>N</kbd> notes &nbsp;·&nbsp; <kbd>T</kbd> theme</p>
+    </div>
+    <div class="title-right" aria-hidden="true" style="display:grid; place-items:center;">
+      <div class="logo-glow" style="left:12%; top:10%;"></div>
+      <div class="ph" style="--pw:15.5cqw;">
+        <div class="ph__scr" style="background:#E3F2FD;"><div class="ph__island"></div>
+          <div class="appbar" style="--ab:#2196F3; --abf:#fff;">Contact</div>
+          <div class="col is-center">
+            <div class="m-card">
+              <div class="m-title" style="font-size:1.3em;">Ahmed Ali</div>
+              <div class="m-sub">Flutter Student</div>
+              <div class="rowx" style="margin-top:1em;"><svg class="ico ico-m"><use href="#i-phone"/></svg><span>091 234 5678</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div></div>
+  <aside class="notes">
+    <p>Until now every widget had one child. Today we put many widgets on one screen: in a column (top to bottom) or in a row (left to right).</p>
+  </aside>
+</section>
+
+<!-- 02 · Today -->
+<section class="slide">
+  <div class="canvas"><div class="frame">
+    <header class="head">
+      <p class="kicker">Today</p>
+      <h2 class="title">Today's plan</h2>
+      <p class="lead">Last lecture: <b>one</b> box with <b>one</b> text. Today: many widgets, nicely arranged.</p>
+    </header>
+    <div class="body" style="grid-template-rows: 1fr auto;">
+      <div class="journey stagger" style="grid-template-columns: repeat(6, 1fr);">
+        <div class="stop"><div class="stop__dot"><svg class="ico"><use href="#i-activity"/></svg><span class="stop__n">1</span></div><h3>Column</h3><p>top to bottom</p></div>
+        <div class="stop"><div class="stop__dot"><svg class="ico"><use href="#i-arrow-right"/></svg><span class="stop__n">2</span></div><h3>Row</h3><p>left to right</p></div>
+        <div class="stop"><div class="stop__dot"><svg class="ico"><use href="#i-target"/></svg><span class="stop__n">3</span></div><h3>Alignment</h3><p>main &amp; cross axis</p></div>
+        <div class="stop"><div class="stop__dot"><svg class="ico"><use href="#i-package"/></svg><span class="stop__n">4</span></div><h3>Space</h3><p>SizedBox &amp; Padding</p></div>
+        <div class="stop"><div class="stop__dot"><svg class="ico"><use href="#i-layers"/></svg><span class="stop__n">5</span></div><h3>Expanded</h3><p>share the space</p></div>
+        <div class="stop"><div class="stop__dot"><svg class="ico"><use href="#i-star"/></svg><span class="stop__n">6</span></div><h3>Build it</h3><p>a contact card</p></div>
+      </div>
+      <div class="callout callout--ok goal"><svg class="ico"><use href="#i-target"/></svg><div><b>Goal:</b> build a contact card with a name, a title and a phone number, laid out with Column and Row.</div></div>
+    </div>
+    <footer class="foot"><span>Mobile App Development · Lecture 05</span><span class="num"></span></footer>
+  </div></div>
+  <aside class="notes"><p>Quick warm-up: ask a student to explain Scaffold, AppBar and Container from last lecture in one sentence each.</p></aside>
+</section>
+
+<!-- 03 · child vs children -->
+<section class="slide">
+  <div class="canvas"><div class="frame">
+    <header class="head">
+      <p class="kicker">The big idea</p>
+      <h2 class="title"><code>child</code> holds one. <code>children</code> holds many.</h2>
+    </header>
+    <div class="body row2" style="align-items:start;">
+      <article class="card" style="display:grid; gap:1.2cqw;">
+        <span class="badge">Last lecture</span>
+        <h3>One widget: <code>child:</code></h3>
+        <div class="term code code--lg code--nonum"><pre class="hl">Center(
+  child: Text('Hello'),
+)</pre></div>
+        <p style="font-size:1.35cqw;">Center, Container and Padding hold <b>one</b> child.</p>
+      </article>
+      <article class="card card--hl" style="display:grid; gap:1.2cqw;">
+        <span class="badge badge--ok">Today</span>
+        <h3>Many widgets: <code>children: [ ]</code></h3>
+        <div class="term code code--lg code--nonum"><pre class="hl">Column(
+  children: [
+    Text('One'),
+    Text('Two'),
+    Text('Three'),
+  ],
+)</pre></div>
+        <p style="font-size:1.35cqw;"><b>[ ]</b> is a <b>list</b>. Put widgets inside, separated by commas.</p>
+      </article>
+    </div>
+    <footer class="foot"><span>Mobile App Development · Lecture 05</span><span class="num"></span></footer>
+  </div></div>
+  <aside class="notes"><p>The square brackets are a Dart List. Column and Row take a list of widgets in <code>children</code>.</p></aside>
+</section>
+
+<!-- 04 · Column -->
+<section class="slide">
+  <div class="canvas"><div class="frame">
+    <header class="head">
+      <p class="kicker">Widget 1 · Column</p>
+      <h2 class="title">Column: widgets from top to bottom</h2>
+    </header>
+    <div class="body" style="grid-template-columns: 1.1fr .9fr auto; gap: 2cqw; align-items: start;">
+      <div class="term code code--lg">
+        <div class="term__bar"><i></i><i></i><i></i><span>lib/main.dart</span></div>
+<pre class="hl" data-hl="1,5">body: Column(
+  children: [
+    Text('Ahmed Ali'),
+    Text('Flutter Student'),
+    Text('Tripoli, Libya'),
+  ],
+),</pre>
+      </div>
+      <div class="explain stagger">
+        <div class="defs">
+          <div class="def"><code>Column</code><span>Stacks its children <b>vertically</b></span></div>
+          <div class="def"><code>children:</code><span>The list of widgets, top to bottom</span></div>
+        </div>
+        <div class="callout callout--info"><svg class="ico"><use href="#i-bulb"/></svg><div>The first widget in the list is at the <b>top</b>.</div></div>
+      </div>
+      <div class="ph" style="--pw:13cqw;">
+        <div class="ph__scr"><div class="ph__island"></div>
+          <div class="appbar" style="--ab:#2196F3; --abf:#fff;">Column</div>
+          <div class="col" style="gap:.3em; align-items:flex-start;"><span>Ahmed Ali</span><span>Flutter Student</span><span>Tripoli, Libya</span></div>
+        </div>
+      </div>
+    </div>
+    <footer class="foot"><span>Mobile App Development · Lecture 05</span><span class="num"></span></footer>
+  </div></div>
+  <aside class="notes"><p>Run it live. Notice the texts sit at the top-left: a Column starts at the top by default. We'll move them on the next slides.</p></aside>
+</section>
+
+<!-- 05 · Row -->
+<section class="slide">
+  <div class="canvas"><div class="frame">
+    <header class="head">
+      <p class="kicker">Widget 2 · Row</p>
+      <h2 class="title">Row: widgets from left to right</h2>
+    </header>
+    <div class="body" style="grid-template-columns: 1.1fr .9fr auto; gap: 2cqw; align-items: start;">
+      <div class="term code code--lg">
+        <div class="term__bar"><i></i><i></i><i></i><span>lib/main.dart</span></div>
+<pre class="hl" data-hl="1,5">body: Row(
+  children: [
+    Icon(Icons.home),
+    Icon(Icons.search),
+    Icon(Icons.person),
+  ],
+),</pre>
+      </div>
+      <div class="explain stagger">
+        <div class="defs">
+          <div class="def"><code>Row</code><span>Puts its children <b>side by side</b></span></div>
+          <div class="def"><code>Icon(Icons.home)</code><span>A ready-made Material icon</span></div>
+        </div>
+        <div class="callout callout--info"><svg class="ico"><use href="#i-bulb"/></svg><div>Column and Row use the <b>same</b> properties. Learn one, you know both!</div></div>
+      </div>
+      <div class="ph" style="--pw:13cqw;">
+        <div class="ph__scr"><div class="ph__island"></div>
+          <div class="appbar" style="--ab:#2196F3; --abf:#fff;">Row</div>
+          <div class="col"><div class="rowx" style="gap:.3em;"><svg class="ico ico-m"><use href="#i-home"/></svg><svg class="ico ico-m"><use href="#i-search"/></svg><svg class="ico ico-m"><use href="#i-user"/></svg></div></div>
+        </div>
+      </div>
+    </div>
+    <footer class="foot"><span>Mobile App Development · Lecture 05</span><span class="num"></span></footer>
+  </div></div>
+  <aside class="notes"><p>In Arabic (right-to-left) apps, a Row starts from the right automatically. Flutter handles that for us.</p></aside>
+</section>
+
+<!-- 06 · Main & cross axis -->
+<section class="slide">
+  <div class="canvas"><div class="frame">
+    <header class="head">
+      <p class="kicker">Alignment</p>
+      <h2 class="title">Main axis and cross axis</h2>
+      <p class="lead"><b>Main axis</b> = the direction the widgets flow. <b>Cross axis</b> = the other direction.</p>
+    </header>
+    <div class="body row2" style="align-items:start; justify-items:center;">
+      <div style="display:grid; gap:1cqw; justify-items:center;">
+        <span class="badge">Column</span>
+        <div style="padding: 0 9cqw 4.5cqw 0;">
+          <div class="axis axis--col">
+            <span class="blk">Text</span><span class="blk">Text</span><span class="blk">Text</span>
+            <span class="arrow arrow--down" style="--c:#F59E0B;"></span>
+            <span class="arrow-lbl" style="--c:#B45309; right:-8.6cqw; top:45%;">main ↓</span>
+            <span class="arrow arrow--right" style="--c:#8B5CF6;"></span>
+            <span class="arrow-lbl" style="--c:#6D28D9; bottom:-4.4cqw; left:35%;">cross →</span>
+          </div>
+        </div>
+      </div>
+      <div style="display:grid; gap:1cqw; justify-items:center;">
+        <span class="badge">Row</span>
+        <div style="padding: 0 9cqw 4.5cqw 0;">
+          <div class="axis axis--row">
+            <span class="blk">Icon</span><span class="blk">Icon</span><span class="blk">Icon</span>
+            <span class="arrow arrow--right" style="--c:#F59E0B;"></span>
+            <span class="arrow-lbl" style="--c:#B45309; bottom:-4.4cqw; left:40%;">main →</span>
+            <span class="arrow arrow--down" style="--c:#8B5CF6;"></span>
+            <span class="arrow-lbl" style="--c:#6D28D9; right:-8.6cqw; top:30%;">cross ↓</span>
+          </div>
+        </div>
+      </div>
+      <div class="callout callout--info" style="grid-column: 1 / -1; justify-self: stretch;"><svg class="ico"><use href="#i-bulb"/></svg><div><code>mainAxisAlignment</code> moves widgets along the <b>main</b> axis. <code>crossAxisAlignment</code> moves them along the <b>cross</b> axis.</div></div>
+    </div>
+    <footer class="foot"><span>Mobile App Development · Lecture 05</span><span class="num"></span></footer>
+  </div></div>
+  <aside class="notes"><p>Students mix these up all the time. Repeat: Column main = down, Row main = right. Ask them to point with their arm.</p></aside>
+</section>
+
+<!-- 07 · mainAxisAlignment -->
+<section class="slide">
+  <div class="canvas"><div class="frame">
+    <header class="head">
+      <p class="kicker">Alignment</p>
+      <h2 class="title"><code>mainAxisAlignment</code> in a Row</h2>
+      <p class="lead">Six ways to spread the widgets along the main axis.</p>
+    </header>
+    <div class="body fx-grid stagger">
+      <div class="fx"><code>MainAxisAlignment.start</code><div class="fx__box fx__box--row" style="justify-content:flex-start;"><i></i><i></i><i></i></div></div>
+      <div class="fx"><code>MainAxisAlignment.center</code><div class="fx__box fx__box--row" style="justify-content:center;"><i></i><i></i><i></i></div></div>
+      <div class="fx"><code>MainAxisAlignment.end</code><div class="fx__box fx__box--row" style="justify-content:flex-end;"><i></i><i></i><i></i></div></div>
+      <div class="fx"><code>MainAxisAlignment.spaceBetween</code><div class="fx__box fx__box--row" style="justify-content:space-between;"><i></i><i></i><i></i></div></div>
+      <div class="fx"><code>MainAxisAlignment.spaceAround</code><div class="fx__box fx__box--row" style="justify-content:space-around;"><i></i><i></i><i></i></div></div>
+      <div class="fx"><code>MainAxisAlignment.spaceEvenly</code><div class="fx__box fx__box--row" style="justify-content:space-evenly;"><i></i><i></i><i></i></div></div>
+    </div>
+    <div class="term code code--nonum" style="margin-top:1.2cqw;"><pre class="hl">Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [ ... ])</pre></div>
+    <footer class="foot"><span>Mobile App Development · Lecture 05</span><span class="num"></span></footer>
+  </div></div>
+  <aside class="notes"><p>spaceBetween: no space at the edges. spaceAround: half space at the edges. spaceEvenly: equal space everywhere. Live demo: change the value and hot reload each one.</p></aside>
+</section>
+
+<!-- 08 · crossAxisAlignment -->
+<section class="slide">
+  <div class="canvas"><div class="frame">
+    <header class="head">
+      <p class="kicker">Alignment</p>
+      <h2 class="title"><code>crossAxisAlignment</code> in a Column</h2>
+      <p class="lead">In a Column, the cross axis is <b>left ↔ right</b>.</p>
+    </header>
+    <div class="body fx-grid fx-grid--4 stagger">
+      <div class="fx"><code>.start</code><div class="fx__box fx__box--col" style="align-items:flex-start;"><i></i><i></i><i></i></div></div>
+      <div class="fx"><code>.center</code><div class="fx__box fx__box--col" style="align-items:center;"><i></i><i></i><i></i></div></div>
+      <div class="fx"><code>.end</code><div class="fx__box fx__box--col" style="align-items:flex-end;"><i></i><i></i><i></i></div></div>
+      <div class="fx"><code>.stretch</code><div class="fx__box fx__box--col" style="align-items:stretch;"><i style="width:auto;"></i><i style="width:auto;"></i><i style="width:auto;"></i></div></div>
+    </div>
+    <div class="term code code--nonum" style="margin-top:1.2cqw;"><pre class="hl">Column(crossAxisAlignment: CrossAxisAlignment.start, children: [ ... ])</pre></div>
+    <footer class="foot"><span>Mobile App Development · Lecture 05</span><span class="num"></span></footer>
+  </div></div>
+  <aside class="notes"><p>CrossAxisAlignment.start is the one students use most: it lines texts up on the left, like a form or a card. The default is center.</p></aside>
+</section>
+
+<!-- 09 · SizedBox -->
+<section class="slide">
+  <div class="canvas"><div class="frame">
+    <header class="head">
+      <p class="kicker">Space</p>
+      <h2 class="title"><code>SizedBox</code>: an invisible box for space</h2>
+    </header>
+    <div class="body walk">
+      <div class="term code code--lg">
+        <div class="term__bar"><i></i><i></i><i></i><span>lib/main.dart</span></div>
+<pre class="hl" data-hl="4,6">Column(
+  children: [
+    Text('Name'),
+    SizedBox(height: 20),
+    Text('Email'),
+    SizedBox(height: 20),
+    Text('Phone'),
+  ],
+)</pre>
+      </div>
+      <div class="explain stagger">
+        <div class="defs">
+          <div class="def"><code>SizedBox(height: 20)</code><span>Empty space <b>between</b> widgets in a Column</span></div>
+          <div class="def"><code>SizedBox(width: 10)</code><span>Empty space between widgets in a Row</span></div>
+          <div class="def"><code>SizedBox(width: 200, child: …)</code><span>Gives its child a <b>fixed size</b></span></div>
+        </div>
+        <div class="callout callout--info"><svg class="ico"><use href="#i-bulb"/></svg><div>You can't see a SizedBox. You only see the <b>gap</b> it makes.</div></div>
+      </div>
+    </div>
+    <footer class="foot"><span>Mobile App Development · Lecture 05</span><span class="num"></span></footer>
+  </div></div>
+  <aside class="notes"><p>SizedBox is the simplest way to add space. Most real screens are full of SizedBox(height: 8 / 16 / 24).</p></aside>
+</section>
+
+<!-- 10 · Padding -->
+<section class="slide">
+  <div class="canvas"><div class="frame">
+    <header class="head">
+      <p class="kicker">Space</p>
+      <h2 class="title"><code>Padding</code> and <code>EdgeInsets</code></h2>
+      <p class="lead">Padding adds space <b>around</b> its child. EdgeInsets says <b>where</b>.</p>
+    </header>
+    <div class="body" style="grid-template-columns: 1fr 1fr; gap: 2.4cqw; align-items:start;">
+      <div class="term code code--lg">
+        <div class="term__bar"><i></i><i></i><i></i><span>lib/main.dart</span></div>
+<pre class="hl" data-hl="2">Padding(
+  padding: EdgeInsets.all(16),
+  child: Text('Hello'),
+)</pre>
+      </div>
+      <div class="stagger" style="display:grid; gap:1.2cqw;">
+        <div class="pad-demo"><code class="tk-type" style="font:600 1.05cqw var(--font-mono); color:var(--sky);">EdgeInsets.all(16)</code><div class="pad-demo__outer" style="padding:1.4cqw;"><div class="pad-demo__inner">child</div></div></div>
+        <div class="pad-demo"><code style="font:600 1.05cqw var(--font-mono); color:var(--sky);">EdgeInsets.symmetric(horizontal: 24)</code><div class="pad-demo__outer" style="padding:0 2.4cqw;"><div class="pad-demo__inner">child</div></div></div>
+        <div class="pad-demo"><code style="font:600 1.05cqw var(--font-mono); color:var(--sky);">EdgeInsets.only(left: 32)</code><div class="pad-demo__outer" style="padding:0 0 0 3.2cqw;"><div class="pad-demo__inner">child</div></div></div>
+      </div>
+    </div>
+    <footer class="foot"><span>Mobile App Development · Lecture 05</span><span class="num"></span></footer>
+  </div></div>
+  <aside class="notes"><p>The green stripes show the padding. Container has a padding property too; the Padding widget is for when you only need space, not a colored box.</p></aside>
+</section>
+
+<!-- 11 · Expanded -->
+<section class="slide">
+  <div class="canvas"><div class="frame">
+    <header class="head">
+      <p class="kicker">Widget 3 · Expanded</p>
+      <h2 class="title"><code>Expanded</code>: take the free space</h2>
+    </header>
+    <div class="body walk">
+      <div class="term code code--lg">
+        <div class="term__bar"><i></i><i></i><i></i><span>lib/main.dart</span></div>
+<pre class="hl" data-hl="4-7">Row(
+  children: [
+    Container(width: 80, color: Colors.grey),
+    Expanded(
+      flex: 1,
+      child: Container(color: Colors.blue),
+    ),
+  ],
+)</pre>
+      </div>
+      <div class="explain stagger">
+        <div class="say"><p>Expanded makes its child <b>fill the space that's left</b> in a Row or Column.</p></div>
+        <div class="exp-row"><div class="exp-fixed">80</div><div class="exp-1">Expanded</div></div>
+        <div class="say" style="font-size:1.3cqw;"><p>Two Expanded? <code>flex</code> decides who gets more:</p></div>
+        <div class="exp-row"><div class="exp-1">flex: 1</div><div class="exp-2">flex: 2</div></div>
+      </div>
+    </div>
+    <footer class="foot"><span>Mobile App Development · Lecture 05</span><span class="num"></span></footer>
+  </div></div>
+  <aside class="notes"><p>flex: 2 gets twice the space of flex: 1. Expanded only works directly inside a Row, Column or Flex.</p></aside>
+</section>
+
+<!-- 12 · Build it -->
+<section class="slide">
+  <div class="canvas"><div class="frame">
+    <header class="head">
+      <p class="kicker">Build it together</p>
+      <h2 class="title">A contact card</h2>
+    </header>
+    <div class="body" style="grid-template-columns: 1.25fr .75fr; gap: 2.4cqw; align-items: start;">
+      <div class="term code code--sm">
+        <div class="term__bar"><i></i><i></i><i></i><span>lib/main.dart</span><span class="grow"></span><span>inside Scaffold</span></div>
+<pre class="hl">body: Center(
+  child: Container(
+    padding: const EdgeInsets.all(20),
+    decoration: BoxDecoration(
+      color: Colors.white,
+      borderRadius: BorderRadius.circular(16),
+    ),
+    child: const Column(
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text('Ahmed Ali', style: TextStyle(fontSize: 22)),
+        Text('Flutter Student'),
+        SizedBox(height: 16),
+        Row(children: [
+          Icon(Icons.phone),
+          SizedBox(width: 8),
+          Text('091 234 5678'),
+        ]),
+      ],
+    ),
+  ),
+),</pre>
+      </div>
+      <div class="center-stack" style="gap:1.2cqw;">
+        <div class="ph" style="--pw:13.5cqw;">
+          <div class="ph__scr" style="background:#E3F2FD;"><div class="ph__island"></div>
+            <div class="appbar" style="--ab:#2196F3; --abf:#fff;">Contact</div>
+            <div class="col is-center">
+              <div class="m-card">
+                <div class="m-title" style="font-size:1.3em;">Ahmed Ali</div>
+                <div class="m-sub">Flutter Student</div>
+                <div class="rowx" style="margin-top:1em;"><svg class="ico ico-m"><use href="#i-phone"/></svg><span>091 234 5678</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="callout" style="font-size:1.05cqw;"><svg class="ico"><use href="#i-bulb"/></svg><div><code>MainAxisSize.min</code>: the Column is only as tall as its children.</div></div>
+      </div>
+    </div>
+    <footer class="foot"><span>Mobile App Development · Lecture 05</span><span class="num"></span></footer>
+  </div></div>
+  <aside class="notes"><p>Build it in steps: Container, then Column with two Texts, then SizedBox, then the Row. Run after each step.</p><p>Without <code>mainAxisSize: MainAxisSize.min</code> the Column takes the full height and the white card stretches from top to bottom. Show it, then fix it. Set the Scaffold's <code>backgroundColor</code> to <code>Colors.blue.shade50</code> so the white card stands out.</p></aside>
+</section>
+
+<!-- 13 · Mistakes -->
+<section class="slide">
+  <div class="canvas"><div class="frame">
+    <header class="head">
+      <p class="kicker">Troubleshooting</p>
+      <h2 class="title">3 layout mistakes everyone makes</h2>
+    </header>
+    <div class="body" style="grid-template-rows: auto auto 1fr; align-content:start;">
+      <div class="overflow-box" style="width:60%;"><span>Text</span><span>Text</span><span>A very long text that doesn't fit…</span></div>
+      <table class="tbl tbl--probs">
+        <tbody>
+          <tr><td><span class="err">A RenderFlex overflowed by 42 pixels on the right.</span></td><td>Too wide for the screen (yellow-black stripes). Wrap the long widget in <code>Expanded</code>.</td></tr>
+          <tr><td><span class="err">The named parameter 'child' isn't defined.</span></td><td>Column and Row use <code>children: [ ]</code>, not <code>child:</code>.</td></tr>
+          <tr><td><span class="err">Incorrect use of ParentDataWidget.</span></td><td><code>Expanded</code> must be <b>directly</b> inside a Row or Column.</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <footer class="foot"><span>Mobile App Development · Lecture 05</span><span class="num"></span></footer>
+  </div></div>
+  <aside class="notes"><p>Show the overflow live: put a very long Text in a Row. The stripes only appear while developing, but they mean the layout is broken.</p></aside>
+</section>
+
+<!-- 14 · Practice + videos -->
+<section class="slide">
+  <div class="canvas"><div class="frame">
+    <header class="head">
+      <p class="kicker">Wrap-up</p>
+      <h2 class="title">Practice and watch</h2>
+    </header>
+    <div class="body wrap">
+      <article class="card">
+        <h3>Practice</h3>
+        <ul class="checklist stagger">
+          <li><span>Build the contact card with <b>your</b> name and number</span></li>
+          <li><span>Add a second Row with an email icon</span></li>
+          <li><span>Try all 6 <code>mainAxisAlignment</code> values in a Row</span></li>
+          <li><span>Make a Row of 3 boxes using <code>Expanded</code> with flex 1, 2, 1</span></li>
+        </ul>
+      </article>
+      <div class="side">
+        <div class="videos">
+          <a class="video" href="https://www.youtube.com/watch?v=1Iiq4oPCz3k" target="_blank" rel="noopener"><span class="yt"><svg class="ico"><use href="#i-play"/></svg></span><span>Columns &amp; Rows · Widget of the Day #03</span><small>4:29</small></a>
+          <a class="video" href="https://www.youtube.com/watch?v=aHT7HF8sV14" target="_blank" rel="noopener"><span class="yt"><svg class="ico"><use href="#i-play"/></svg></span><span>Expanded · Widget of the Day #02</span><small>3:31</small></a>
+        </div>
+        <div class="card next">
+          <h4>Next lecture</h4>
+          <p>Icons, images &amp; assets</p>
+        </div>
+        <div class="qa__big grad-text" style="font-size:4.2cqw;">Questions?</div>
+      </div>
+    </div>
+    <footer class="foot"><span>Mobile App Development · Lecture 05</span><span class="num"></span></footer>
+  </div></div>
+  <aside class="notes"><p>Project 1 (the profile card) can now use Column and Row, so students' cards will look much better.</p></aside>
+</section>
+
+</main>
+
+<div class="notes-panel" hidden>
+  <h4 class="np-title">Speaker notes</h4>
+  <div class="np-body"></div>
+</div>
+<div class="hint" aria-hidden="true"><kbd>←</kbd> <kbd>→</kbd> navigate · <kbd>F</kbd> fullscreen · <kbd>N</kbd> notes · <kbd>T</kbd> theme</div>
+
+<script src="js/deck.js"></script>
+</body>
+</html>
